@@ -59,3 +59,7 @@ crashlytics-build.properties
 # Python
 **/__pycache__
 **/__pycache__.meta
+
+# API Token
+[Aa]ssets/Editor/Util/ScreenShooter/Resources/Setting/*
+[Aa]ssets/Editor/Util/ScreenShooter/Resources/Setting.meta
