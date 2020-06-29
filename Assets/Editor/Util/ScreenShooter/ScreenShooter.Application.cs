@@ -1,10 +1,10 @@
-﻿using EditorCoroutineExtension;
-using System;
+﻿using System;
 using System.Collections;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
+using EditorCoroutineExtension;
 
 namespace ScreenShooter.Window
 {
