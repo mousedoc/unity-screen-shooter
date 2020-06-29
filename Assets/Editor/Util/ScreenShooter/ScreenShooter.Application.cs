@@ -119,30 +119,30 @@ namespace ScreenShooter.Window
 
         private void Send()
         {
-            if (currentCaptureTexture != null)
+            if (currentCaptureTexture == null)
+                return;
+
+            var setting = SettingHelper.Load(MessengerType);
+
+            if (setting == null)
             {
-                var setting = SettingHelper.Load(MessengerType);
-
-                if (setting == null)
-                {
-                    Debug.LogError("[ScreenShotShooter.Application] Send() - Setup first");
-                    return;
-                }
-
-                var request = setting.CreateWebRequest(titleInput, commentInput, currentCaptureTexture);
-
-                EditorCoroutines.StartCoroutine(Send(request, () =>
-                {
-                    currentCaptureTexture = null;
-                    currentCaptureTexturePath = null;
-                },
-                (error) =>
-                {
-                    Debug.LogError("[ScreenShotShooter.Application] Send() - Fail to send");
-                    currentCaptureTexture = null;
-                    currentCaptureTexturePath = null;
-                }), this);
+                Debug.LogError("[ScreenShotShooter.Application] Send() - Setup first");
+                return;
             }
+
+            var request = setting.CreateWebRequest(titleInput, commentInput, currentCaptureTexture);
+
+            EditorCoroutines.StartCoroutine(Send(request, () =>
+            {
+                currentCaptureTexture = null;
+                currentCaptureTexturePath = null;
+            },
+            (error) =>
+            {
+                Debug.LogError("[ScreenShotShooter.Application] Send() - Fail to send");
+                currentCaptureTexture = null;
+                currentCaptureTexturePath = null;
+            }), this);
         }
 
         private static IEnumerator Send(UnityWebRequest www, Action successCallback, Action<string> errorCallback)
